@@ -5,4 +5,11 @@ public class Event {
     private String eventName;
     private String description;
     private long date;
+
+    public Event(String eventId, String eventName, String description, long date) {
+        this.eventId = eventId;
+        this.eventName = eventName;
+        this.description = description;
+        this.date = date;
+    }
 }
