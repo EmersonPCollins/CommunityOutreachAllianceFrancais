@@ -8,7 +8,6 @@ import java.util.List;
 
 public class DummyEventRetriever implements EventRetriever {
 
-
     @Override
     public List<Event> getEvents() {
         List<Event> list= new ArrayList<>();
