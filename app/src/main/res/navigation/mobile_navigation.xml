@@ -16,5 +16,5 @@
         android:name="com.csci.afevents.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
-    
+
 </navigation>
