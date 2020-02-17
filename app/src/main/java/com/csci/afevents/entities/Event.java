@@ -12,4 +12,16 @@ public class Event {
         this.description = description;
         this.date = date;
     }
+    public String getEventId(){
+        return eventId;
+    }
+    public String getEventName(){
+        return eventName;
+    }
+    public String getDescription(){
+        return description;
+    }
+    public long getDate(){
+        return date;
+    }
 }
