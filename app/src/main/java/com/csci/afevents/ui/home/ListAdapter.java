@@ -1,5 +1,6 @@
 package com.csci.afevents.ui.home;
 
+import android.content.Context;
 import android.graphics.ImageFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.csci.afevents.R;
 import com.csci.afevents.api.EventRetriever;
-import com.csci.afevents.api.data;
+import com.csci.afevents.api.EventRetrieverFactory;
+import com.csci.afevents.entities.Event;
 import com.csci.afevents.impl.DummyEventRetriever;
 
 import org.w3c.dom.Text;
@@ -26,6 +28,9 @@ import java.util.List;
  */
 
 public class ListAdapter extends RecyclerView.Adapter {
+
+    List<Event> list = EventRetrieverFactory.getInstance(this.getContext()).getEvents();
+    private Context context;
 
     @NonNull
     @Override
@@ -50,25 +55,44 @@ public class ListAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
 
-        return data.events.size();
+        return list.size();
     }
+
+    private Context getContext() {
+        return context;
+    }
+
+    private void setContext(Context context) {
+        this.context = context;
+    }
+
     private class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView eventName, eventDescription, eventDate;
-        //private ImageView mItemImage;
 
         private ListViewHolder(View itemView){
             super(itemView);
             eventDate = itemView.findViewById(R.id.event_Date);
             eventDescription = itemView.findViewById(R.id.event_Description);
             eventName = itemView.findViewById(R.id.event_Name);
+
             itemView.setOnClickListener(this);
         }
         private void bindView(int position){
-            eventName.setText(data.name[position]);
-            eventDescription.setText(data.description[position]);
-            eventDate.setText(""+data.date[position]);
+            String[] name = new String[getItemCount()];
+            String[] description = new String[getItemCount()];
+            long[] date = new long[getItemCount()];
 
+            for(int i=0; i<getItemCount(); i++){
+                Event e = list.get(i);
+                name[i] = e.getEventName();
+                description[i] = e.getDescription();
+                date[i] = e.getDate();
+            }
+            eventName.setText(name[position]);
+            eventDescription.setText(description[position]);
+            eventDate.setText(""+date[position]);
         }
+
         public void onClick(View view){
 
         }
