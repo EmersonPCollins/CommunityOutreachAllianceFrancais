@@ -1,101 +1,76 @@
 package com.csci.afevents.ui.home;
 
 import android.content.Context;
-import android.graphics.ImageFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.csci.afevents.R;
-import com.csci.afevents.api.EventRetriever;
 import com.csci.afevents.api.EventRetrieverFactory;
 import com.csci.afevents.entities.Event;
-import com.csci.afevents.impl.DummyEventRetriever;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
 /**
  * @author Adama Camara
- * Class is a list adapter that upload event's data
- * from our data.java to the recyclerView
+ *
+ * Recycler View adapter for displaying events in a list layout
  */
 
-public class ListAdapter extends RecyclerView.Adapter {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
 
-    List<Event> list = EventRetrieverFactory.getInstance(this.getContext()).getEvents();
-    private Context context;
+    List<Event> data;
+
+    ListAdapter(Context context) {
+        data = EventRetrieverFactory.getInstance(context).getEvents();
+    }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_view_item, parent, false);
         return new ListViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ListViewHolder) holder).bindView(position);
-
+    public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
+        holder.bindView(position);
     }
 
-
     @Override
-    public long getItemId(int position)
-    {
+    public long getItemId(int position) {
         return super.getItemId(position);
     }
 
     @Override
     public int getItemCount() {
-
-        return list.size();
+        return data.size();
     }
 
-    private Context getContext() {
-        return context;
-    }
+    public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private TextView eventNameView, eventDescriptionView, eventDateView;
 
-    private void setContext(Context context) {
-        this.context = context;
-    }
-
-    private class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView eventName, eventDescription, eventDate;
-
-        private ListViewHolder(View itemView){
+        private ListViewHolder(View itemView) {
             super(itemView);
-            eventDate = itemView.findViewById(R.id.event_Date);
-            eventDescription = itemView.findViewById(R.id.event_Description);
-            eventName = itemView.findViewById(R.id.event_Name);
-
+            eventDateView = itemView.findViewById(R.id.event_Date);
+            eventDescriptionView = itemView.findViewById(R.id.event_Description);
+            eventNameView = itemView.findViewById(R.id.event_Name);
             itemView.setOnClickListener(this);
         }
-        private void bindView(int position){
-            String[] name = new String[getItemCount()];
-            String[] description = new String[getItemCount()];
-            long[] date = new long[getItemCount()];
 
-            for(int i=0; i<getItemCount(); i++){
-                Event e = list.get(i);
-                name[i] = e.getEventName();
-                description[i] = e.getDescription();
-                date[i] = e.getDate();
-            }
-            eventName.setText(name[position]);
-            eventDescription.setText(description[position]);
-            eventDate.setText(""+date[position]);
+        private void bindView(int position) {
+            Event event = data.get(position);
+            eventNameView.setText(event.getEventName());
+            eventDescriptionView.setText(event.getEventName());
+            eventDateView.setText(String.valueOf(event.getDate()));
         }
 
         public void onClick(View view){
-
+            //TODO: Open the EventDetailFragment when implemented
         }
-
     }
 }
