@@ -52,12 +52,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     }
 
     public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView eventNameView, eventDescriptionView, eventDateView;
+        private TextView eventNameView, eventDateView;
 
         private ListViewHolder(View itemView) {
             super(itemView);
             eventDateView = itemView.findViewById(R.id.event_date);
-            eventDescriptionView = itemView.findViewById(R.id.event_description);
             eventNameView = itemView.findViewById(R.id.event_name);
             itemView.setOnClickListener(this);
         }
@@ -65,7 +64,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         private void bindView(int position) {
             Event event = data.get(position);
             eventNameView.setText(event.getEventName());
-            eventDescriptionView.setText(event.getEventName());
             eventDateView.setText(String.valueOf(event.getDate()));
         }
 
