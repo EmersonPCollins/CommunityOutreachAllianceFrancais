@@ -32,7 +32,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_view_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_list_item_view, parent, false);
         return new ListViewHolder(view);
     }
 
@@ -52,20 +52,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     }
 
     public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView eventNameView, eventDescriptionView, eventDateView;
+        private TextView eventNameView, eventDateView;
 
         private ListViewHolder(View itemView) {
             super(itemView);
-            eventDateView = itemView.findViewById(R.id.event_Date);
-            eventDescriptionView = itemView.findViewById(R.id.event_Description);
-            eventNameView = itemView.findViewById(R.id.event_Name);
+            eventDateView = itemView.findViewById(R.id.event_date);
+            eventNameView = itemView.findViewById(R.id.event_name);
             itemView.setOnClickListener(this);
         }
 
         private void bindView(int position) {
             Event event = data.get(position);
             eventNameView.setText(event.getEventName());
-            eventDescriptionView.setText(event.getEventName());
             eventDateView.setText(String.valueOf(event.getDate()));
         }
 
