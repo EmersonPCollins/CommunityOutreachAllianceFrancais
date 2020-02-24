@@ -32,7 +32,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_view_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_list_item_view, parent, false);
         return new ListViewHolder(view);
     }
 
@@ -56,9 +56,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
         private ListViewHolder(View itemView) {
             super(itemView);
-            eventDateView = itemView.findViewById(R.id.event_Date);
-            eventDescriptionView = itemView.findViewById(R.id.event_Description);
-            eventNameView = itemView.findViewById(R.id.event_Name);
+            eventDateView = itemView.findViewById(R.id.event_date);
+            eventDescriptionView = itemView.findViewById(R.id.event_description);
+            eventNameView = itemView.findViewById(R.id.event_name);
             itemView.setOnClickListener(this);
         }
 
