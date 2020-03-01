@@ -28,7 +28,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
     ListAdapter(Context context) {
         data = EventRetrieverFactory.getInstance(context).getEvents();
-        LocalDatabaseHandler db = new LocalDatabaseHandler(context);
     }
 
     @NonNull
