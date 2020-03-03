@@ -61,6 +61,7 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
                 events.add(event);
             } while (cursor.moveToNext());
         }
+        cursor.close();
         return events;
     }
 }

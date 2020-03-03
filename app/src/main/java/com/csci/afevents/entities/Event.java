@@ -1,5 +1,7 @@
 package com.csci.afevents.entities;
 
+import java.util.Objects;
+
 public class Event {
     private String eventId;
     private String eventName;
@@ -23,5 +25,21 @@ public class Event {
     }
     public int getDate(){
         return date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return date == event.date &&
+                Objects.equals(eventId, event.eventId) &&
+                Objects.equals(eventName, event.eventName) &&
+                Objects.equals(description, event.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eventId, eventName, description, date);
     }
 }
