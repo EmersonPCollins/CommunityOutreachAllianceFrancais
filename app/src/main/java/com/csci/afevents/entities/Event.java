@@ -4,9 +4,9 @@ public class Event {
     private String eventId;
     private String eventName;
     private String description;
-    private long date;
+    private int date;
 
-    public Event(String eventId, String eventName, String description, long date) {
+    public Event(String eventId, String eventName, String description, int date) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.description = description;
@@ -21,7 +21,7 @@ public class Event {
     public String getDescription(){
         return description;
     }
-    public long getDate(){
+    public int getDate(){
         return date;
     }
 }
