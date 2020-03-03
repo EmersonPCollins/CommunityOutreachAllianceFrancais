@@ -54,4 +54,17 @@ public class LocalDatabaseHandlerTest {
         List<Event> events = db.getAllEvents();
         assertEquals(0, events.size());
     }
+
+    @Test
+    public void testGetAllEvents_manyEventsExist_returnsAllPages() {
+        for (int i = 1; i <= 2000; i++) {
+            Event event = new Event(String.valueOf(i), "event: " + i, "test event", 1583251991 + i);
+            db.insertEvent(event);
+        }
+
+        long countRows = DatabaseUtils.queryNumEntries(db.getReadableDatabase(), LocalDatabaseHandler.TABLE_NAME);
+        assertEquals(2000, countRows);
+        List<Event> events = db.getAllEvents();
+        assertEquals(countRows, events.size());
+    }
 }
