@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.csci.afevents.R;
 import com.csci.afevents.api.EventRetrieverFactory;
 import com.csci.afevents.entities.Event;
+import com.csci.afevents.impl.LocalDatabaseHandler;
 
 import java.util.List;
 
@@ -65,6 +66,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             Event event = data.get(position);
             eventNameView.setText(event.getEventName());
             eventDateView.setText(String.valueOf(event.getDate()));
+
+
         }
 
         public void onClick(View view){
