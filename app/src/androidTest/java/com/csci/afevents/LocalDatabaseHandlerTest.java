@@ -27,7 +27,8 @@ public class LocalDatabaseHandlerTest {
     public void setUp() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         db = new LocalDatabaseHandler(appContext);
-        db.getReadableDatabase().execSQL("DELETE FROM " + LocalDatabaseHandler.TABLE_NAME);
+        int v = db.getReadableDatabase().getVersion();
+        db.onUpgrade(db.getWritableDatabase(), v, v + 1);
     }
 
     @Test
