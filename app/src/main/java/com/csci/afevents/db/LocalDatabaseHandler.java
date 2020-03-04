@@ -20,6 +20,7 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
     public static final String EVENT_NAME = "name";
     public static final String EVENT_DESC = "description";
     public static final String EVENT_DATE = "date";
+    public static final String EVENT_IMAGE = "image_url";
 
     public LocalDatabaseHandler(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -27,7 +28,7 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME+" (ID INTEGER PRIMARY KEY, name VARCHAR(255), description TEXT, date INTEGER)");
+        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME+" (ID INTEGER PRIMARY KEY, name VARCHAR(255), description TEXT, date INTEGER, image_url TEXT)");
     }
 
     @Override
@@ -42,6 +43,7 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(EVENT_NAME, event.getEventName());
         contentValues.put(EVENT_DESC, event.getDescription());
         contentValues.put(EVENT_DATE, event.getDate());
+        contentValues.put(EVENT_IMAGE, event.getImageUrl());
         long result = db.insert(TABLE_NAME,null, contentValues);
         return result != -1;
     }
@@ -56,7 +58,8 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
                         cursor.getString(0),
                         cursor.getString(1),
                         cursor.getString(2),
-                        cursor.getInt(3)
+                        cursor.getInt(3),
+                        cursor.getString(4)
                 );
                 events.add(event);
             } while (cursor.moveToNext());
