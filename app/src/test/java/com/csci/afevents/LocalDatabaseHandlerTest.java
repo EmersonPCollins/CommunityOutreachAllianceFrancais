@@ -7,28 +7,34 @@ import com.csci.afevents.db.LocalDatabaseHandler;
 import com.csci.afevents.entities.Event;
 
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.List;
 
-import androidx.test.platform.app.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
+import androidx.test.core.app.ApplicationProvider;
 
 import static junit.framework.TestCase.assertEquals;
 
-@RunWith(AndroidJUnit4.class)
+@RunWith(RobolectricTestRunner.class)
 public class LocalDatabaseHandlerTest {
 
     LocalDatabaseHandler db;
 
     @Before
     public void setUp() {
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        Context appContext = ApplicationProvider.getApplicationContext();
         db = new LocalDatabaseHandler(appContext);
         int v = db.getReadableDatabase().getVersion();
         db.onUpgrade(db.getWritableDatabase(), v, v + 1);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        db.close();
     }
 
     @Test
