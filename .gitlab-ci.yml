@@ -1,4 +1,3 @@
-
 image: jangrewe/gitlab-ci-android
 
 
@@ -30,6 +29,9 @@ before_script:
     expire_in: 4 hours
     paths:
     - app/build/outputs/
+  tags:
+    - ugrad
+    
     
 build:develop:
   <<: *build
