@@ -6,20 +6,19 @@ import com.csci.afevents.api.EventRetriever;
 import com.csci.afevents.api.EventRetrieverFactory;
 import com.csci.afevents.impl.DummyEventRetriever;
 
-import androidx.test.platform.app.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import static org.junit.Assert.*;
 
-@RunWith(AndroidJUnit4.class)
+@RunWith(RobolectricTestRunner.class)
 public class EventRetrieverFactoryTest {
     @Test
     public void testGetDummyData() {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        Context appContext = ApplicationProvider.getApplicationContext();
         EventRetriever retriever = EventRetrieverFactory.getInstance(appContext);
         assertTrue(retriever instanceof DummyEventRetriever);
     }
