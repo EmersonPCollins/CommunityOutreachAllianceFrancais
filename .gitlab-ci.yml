@@ -5,7 +5,7 @@ variables:
   ANDROID_COMPILE_SDK: "29"
   ANDROID_BUILD_TOOLS: "29.0.2"
   ANDROID_SDK_TOOLS:   "4333796"
-  APP_NAME: "AF Events"
+  APP_NAME: "AFEvents"
 
 cache:
   key: ${CI_PROJECT_ID}
