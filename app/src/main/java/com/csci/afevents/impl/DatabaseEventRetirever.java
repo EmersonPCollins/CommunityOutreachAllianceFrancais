@@ -16,7 +16,7 @@ public class DatabaseEventRetirever implements EventRetriever {
     private LocalDatabaseHandler db;
 
     public DatabaseEventRetirever (Context context) {
-             db = new LocalDatabaseHandler(context);
+        db = new LocalDatabaseHandler(context);
     }
 
     @Override
