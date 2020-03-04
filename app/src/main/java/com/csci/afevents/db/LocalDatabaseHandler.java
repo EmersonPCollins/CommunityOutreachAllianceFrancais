@@ -56,7 +56,8 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
                         cursor.getString(0),
                         cursor.getString(1),
                         cursor.getString(2),
-                        cursor.getInt(3)
+                        cursor.getInt(3),
+                        ""
                 );
                 events.add(event);
             } while (cursor.moveToNext());

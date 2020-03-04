@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.csci.afevents.R;
 import com.csci.afevents.api.EventRetrieverFactory;
 import com.csci.afevents.entities.Event;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -53,11 +55,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
 
     public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView eventNameView, eventDateView;
+        private ImageView eventImageView;
 
         private ListViewHolder(View itemView) {
             super(itemView);
             eventDateView = itemView.findViewById(R.id.event_date);
             eventNameView = itemView.findViewById(R.id.event_name);
+            eventImageView = itemView.findViewById(R.id.event_image);
             itemView.setOnClickListener(this);
         }
 
@@ -65,6 +69,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             Event event = data.get(position);
             eventNameView.setText(event.getEventName());
             eventDateView.setText(String.valueOf(event.getDate()));
+            Picasso.get().load(event.getImageUrl()).fit().centerCrop().into(eventImageView);
         }
 
         public void onClick(View view){
