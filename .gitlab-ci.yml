@@ -1,17 +1,12 @@
-# This file is a template, and might need editing before it works on your project.
-# Read more about this script on this blog post https://about.gitlab.com/2018/10/24/setting-up-gitlab-ci-for-android-projects/, by Jason Lenny
-# If you are interested in using Android with FastLane for publishing take a look at the Android-Fastlane template.
-
-image: openjdk:8-jdk
-
 variables:
+  #EDIT THE SDK AND BUILD TOOLS TO MATCH YOUR GRADLE
   ANDROID_COMPILE_SDK: "29"
   ANDROID_BUILD_TOOLS: "29.0.2"
   ANDROID_SDK_TOOLS:   "4333796"
 
 before_script:
-  - apt-get --quiet update --yes
-  - apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1
+  # The following line is only necessary if using the docker-based runner.
+  #- apk add --no-cache openssh-client
   - wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_TOOLS}.zip
   - unzip -d android-sdk-linux android-sdk.zip
   - echo y | android-sdk-linux/tools/bin/sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}" >/dev/null
@@ -24,15 +19,10 @@ before_script:
   - set +o pipefail
   - yes | android-sdk-linux/tools/bin/sdkmanager --licenses
   - set -o pipefail
-  
+
 stages:
   - build
-  - test  
-
-lintDebug:
-  stage: build
-  script:
-    - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
+  - test
 
 assembleDebug:
   stage: build
@@ -40,20 +30,13 @@ assembleDebug:
     - ./gradlew assembleDebug
   artifacts:
     paths:
-      - app/build/outputs/
+    - app/build/outputs/
   tags:
-   - ugrad      
+    - ugrad
 
 debugTests:
   stage: test
   script:
     - ./gradlew -Pci --console=plain :app:testDebug
   tags:
-   - ugrad    
-
-instrumentationTests:
-  stage: test
-  script:
-   - ./gradlew -Pci --console=plain :app:cAT -PbuildDir=lint
-  tags:
-   - ugrad
+    - ugrad
