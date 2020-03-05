@@ -30,15 +30,13 @@ public class Event {
     public String getDescription(){
         return description;
     }
-
     public int getDate(){
         return date;
     }
-
     public String getImageUrl() {
         return imageUrl;
     }
-    public double getLongitude() {return longitude; }
+    public double getLongitude() { return longitude; }
     public double getLatitude() { return latitude; }
 
     @Override

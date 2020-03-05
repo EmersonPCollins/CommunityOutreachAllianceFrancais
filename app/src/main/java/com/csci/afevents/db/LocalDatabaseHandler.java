@@ -30,7 +30,7 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME+" (ID INTEGER PRIMARY KEY, name VARCHAR(255), description TEXT, date INTEGER, image_url TEXT, Longitude REAL, Latitude REAL)");
+        sqLiteDatabase.execSQL("CREATE TABLE "+TABLE_NAME+" (ID INTEGER PRIMARY KEY, name VARCHAR(255), description TEXT, date INTEGER, image_url TEXT, longitude REAL, latitude REAL)");
     }
 
     @Override
