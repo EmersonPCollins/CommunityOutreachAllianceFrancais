@@ -1,6 +1,8 @@
 package com.csci.afevents.ui.home;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.csci.afevents.R;
 import com.csci.afevents.api.EventRetrieverFactory;
 import com.csci.afevents.entities.Event;
+import com.csci.afevents.ui.detail.EventDetailFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -27,6 +31,12 @@ import java.util.List;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
 
     List<Event> data = new ArrayList<>();
+    FragmentActivity activity;
+
+    public ListAdapter(FragmentActivity fragmentActivity){
+        this.activity = fragmentActivity;
+    }
+
 
     @NonNull
     @Override
@@ -50,7 +60,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         return data.size();
     }
 
-    public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ListViewHolder extends RecyclerView.ViewHolder {
         private TextView eventNameView, eventDateView;
         private ImageView eventImageView;
 
@@ -59,7 +69,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             eventDateView = itemView.findViewById(R.id.event_date);
             eventNameView = itemView.findViewById(R.id.event_name);
             eventImageView = itemView.findViewById(R.id.event_image);
-            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EventDetailFragment eventDetailFragment = new EventDetailFragment();
+                    activity.getSupportFragmentManager().beginTransaction()
+                            .add(R.id.fragment_container_view_tag, eventDetailFragment).commit();
+                }
+            });
         }
 
         private void bindView(int position) {
@@ -67,10 +84,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             eventNameView.setText(event.getEventName());
             eventDateView.setText(String.valueOf(event.getDate()));
             Picasso.get().load(event.getImageUrl()).fit().centerCrop().into(eventImageView);
-        }
-
-        public void onClick(View view){
-            //TODO: Open the EventDetailFragment when implemented
         }
     }
 }
