@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface EventRetriever {
     public List<Event> getEvents();
+
 }
+
