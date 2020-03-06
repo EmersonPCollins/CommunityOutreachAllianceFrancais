@@ -21,8 +21,8 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
     public static final String EVENT_DESC = "description";
     public static final String EVENT_DATE = "date";
     public static final String EVENT_IMAGE = "image_url";
-    public static final String EVENT_LONG = "Longitude";
-    public static final String EVENT_LAT = "Latitude";
+    public static final String EVENT_LONG = "longitude";
+    public static final String EVENT_LAT = "latitude";
 
     public LocalDatabaseHandler(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);

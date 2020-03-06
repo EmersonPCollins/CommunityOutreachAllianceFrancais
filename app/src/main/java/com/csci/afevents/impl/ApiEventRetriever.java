@@ -34,32 +34,36 @@ public class ApiEventRetriever implements EventRetriever {
     @Override
     public LiveData<List<Event>> getEvents() {
         RequestQueue reqQueue = Volley.newRequestQueue(context);
-        JsonObjectRequest req = new JsonObjectRequest(EVENT_ENDPOINT, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                List<Event> list = new ArrayList<>();
-                try {
-                    JSONArray jsonArray = response.getJSONArray("data");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject person = jsonArray.getJSONObject(i);
-                        String name = person.getString("employee_name");
-                        Event ev = new Event("One", name, "Test", 2, "https://www.holland.com/upload_mm/9/c/1/65174_fullimage_joods-bruidje.jpg", 23.24535, 35.3422);
-                        list.add(ev);
-                    }
-                    events.setValue(list);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-
+        JsonObjectRequest req = new JsonObjectRequest(EVENT_ENDPOINT,
+                null,
+                new EventApiResponseListener(),
+                new EventApiResponseListener());
         reqQueue.add(req);
         return events;
+    }
+
+    class EventApiResponseListener implements Response.Listener<JSONObject>, Response.ErrorListener {
+        @Override
+        public void onResponse(JSONObject response) {
+            List<Event> list = new ArrayList<>();
+            try {
+                JSONArray jsonArray = response.getJSONArray("data");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject person = jsonArray.getJSONObject(i);
+                    String name = person.getString("employee_name");
+                    Event ev = new Event("One", name, "Test", 2, "https://www.holland.com/upload_mm/9/c/1/65174_fullimage_joods-bruidje.jpg", 23.24535, 35.3422);
+                    list.add(ev);
+                }
+                events.setValue(list);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            error.printStackTrace();
+        }
     }
 
 }
