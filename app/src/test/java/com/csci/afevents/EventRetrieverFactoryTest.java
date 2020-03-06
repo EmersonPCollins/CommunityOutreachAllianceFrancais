@@ -16,10 +16,7 @@ import static org.junit.Assert.*;
 
 @RunWith(RobolectricTestRunner.class)
 public class EventRetrieverFactoryTest {
-    @Test
-    public void testGetDummyData() {
-        Context appContext = ApplicationProvider.getApplicationContext();
-        EventRetriever retriever = EventRetrieverFactory.getInstance(appContext);
-        assertTrue(retriever instanceof DummyEventRetriever);
-    }
+
+    //TODO: add tests
+
 }
