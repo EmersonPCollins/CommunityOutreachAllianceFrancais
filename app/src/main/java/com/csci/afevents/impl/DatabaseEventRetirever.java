@@ -2,13 +2,13 @@ package com.csci.afevents.impl;
 
 import android.content.Context;
 
-import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.csci.afevents.api.EventRetriever;
 import com.csci.afevents.db.LocalDatabaseHandler;
 import com.csci.afevents.entities.Event;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseEventRetirever implements EventRetriever {
@@ -20,8 +20,10 @@ public class DatabaseEventRetirever implements EventRetriever {
     }
 
     @Override
-    public List<Event> getEvents() {
-        return db.getAllEvents();
+    public LiveData<List<Event>> getEvents() {
+        MutableLiveData<List<Event>> data = new MutableLiveData<>();
+        data.setValue(db.getAllEvents());
+        return data;
     }
 
 }

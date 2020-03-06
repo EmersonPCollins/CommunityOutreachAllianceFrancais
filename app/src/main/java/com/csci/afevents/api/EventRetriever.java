@@ -4,8 +4,10 @@ import com.csci.afevents.entities.Event;
 
 import java.util.List;
 
+import androidx.lifecycle.LiveData;
+
 public interface EventRetriever {
-    public List<Event> getEvents();
+    public LiveData<List<Event>> getEvents();
 
 }
 

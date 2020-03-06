@@ -15,6 +15,7 @@ import com.csci.afevents.api.EventRetrieverFactory;
 import com.csci.afevents.entities.Event;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,11 +26,7 @@ import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
 
-    List<Event> data;
-
-    ListAdapter(Context context) {
-        data = EventRetrieverFactory.getInstance(context).getEvents();
-    }
+    List<Event> data = new ArrayList<>();
 
     @NonNull
     @Override
