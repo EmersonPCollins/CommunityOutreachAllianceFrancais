@@ -15,14 +15,14 @@ import androidx.annotation.Nullable;
 
 public class LocalDatabaseHandler extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "AFH";
     public static final String TABLE_NAME = "event_table";
-    public static final String EVENT_NAME = "name";
-    public static final String EVENT_DESC = "description";
-    public static final String EVENT_DATE = "date";
-    public static final String EVENT_IMAGE = "image_url";
-    public static final String EVENT_LONG = "longitude";
-    public static final String EVENT_LAT = "latitude";
+    private static final String DATABASE_NAME = "AFH";
+    private static final String EVENT_NAME = "name";
+    private static final String EVENT_DESC = "description";
+    private static final String EVENT_DATE = "date";
+    private static final String EVENT_IMAGE = "image_url";
+    private static final String EVENT_LONG = "longitude";
+    private static final String EVENT_LAT = "latitude";
 
     public LocalDatabaseHandler(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);

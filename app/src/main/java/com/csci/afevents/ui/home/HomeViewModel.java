@@ -17,7 +17,6 @@ public class HomeViewModel extends ViewModel {
     private LiveData<List<Event>> events;
     private EventRetriever retriever;
 
-
     public HomeViewModel(Context context) {
         events = new MutableLiveData<>();
         retriever = EventRetrieverFactory.getInstance(context);

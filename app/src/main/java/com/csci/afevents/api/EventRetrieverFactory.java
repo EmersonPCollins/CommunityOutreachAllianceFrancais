@@ -3,11 +3,15 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.csci.afevents.impl.ApiEventRetriever;
 import com.csci.afevents.impl.DummyEventRetriever;
 
 public class EventRetrieverFactory {
 
     public static EventRetriever getInstance(Context context) {
+        if (isConnected(context)) {
+            return new ApiEventRetriever(context);
+        }
         return new DummyEventRetriever();
     }
 
