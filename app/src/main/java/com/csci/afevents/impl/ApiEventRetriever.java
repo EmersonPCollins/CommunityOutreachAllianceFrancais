@@ -5,6 +5,7 @@ import android.content.Context;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.csci.afevents.api.EventRetriever;
@@ -34,22 +35,20 @@ public class ApiEventRetriever implements EventRetriever {
     @Override
     public LiveData<List<Event>> getEvents() {
         RequestQueue reqQueue = Volley.newRequestQueue(context);
-        JsonObjectRequest req = new JsonObjectRequest(EVENT_ENDPOINT,
-                null,
+        JsonArrayRequest req = new JsonArrayRequest(EVENT_ENDPOINT,
                 new EventApiResponseListener(),
                 new EventApiResponseListener());
         reqQueue.add(req);
         return events;
     }
 
-    class EventApiResponseListener implements Response.Listener<JSONObject>, Response.ErrorListener {
+    class EventApiResponseListener implements Response.Listener<JSONArray>, Response.ErrorListener {
         @Override
-        public void onResponse(JSONObject response) {
+        public void onResponse(JSONArray response) {
             List<Event> list = new ArrayList<>();
             try {
-                JSONArray jsonArray = response.getJSONArray("event");
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject singleevent = jsonArray.getJSONObject(i);
+                for(int j=0;j<response.length();j++) {
+                    JSONObject singleevent = response.getJSONObject(j);
                     String id = singleevent.getString("id");
                     String name = singleevent.getString("name");
                     String desc = singleevent.getString("description");
