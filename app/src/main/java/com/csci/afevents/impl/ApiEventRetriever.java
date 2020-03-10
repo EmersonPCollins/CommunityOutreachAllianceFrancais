@@ -22,7 +22,6 @@ import androidx.lifecycle.MutableLiveData;
 
 public class ApiEventRetriever implements EventRetriever {
 
-    private static int eventId = 0;
     private Context context;
     private MutableLiveData<List<Event>> events;
     private final String EVENT_ENDPOINT = "https://afhalifax.ca/EVLOFFICE/a.php";
@@ -47,12 +46,11 @@ public class ApiEventRetriever implements EventRetriever {
         @Override
         public void onResponse(JSONObject response) {
             List<Event> list = new ArrayList<>();
-            eventId++;
             try {
                 JSONArray jsonArray = response.getJSONArray("event");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject singleevent = jsonArray.getJSONObject(i);
-                    String id = (""+eventId);
+                    String id = singleevent.getString("id");
                     String name = singleevent.getString("name");
                     String desc = singleevent.getString("description");
                     int date = singleevent.getInt("date");
