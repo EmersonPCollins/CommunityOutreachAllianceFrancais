@@ -24,7 +24,7 @@ public class ApiEventRetriever implements EventRetriever {
 
     private Context context;
     private MutableLiveData<List<Event>> events;
-    private final String EVENT_ENDPOINT = "http://dummy.restapiexample.com/api/v1/employees";
+    private final String EVENT_ENDPOINT = "https://afhalifax.ca/EVLOFFICE/a.php";
 
     public ApiEventRetriever(Context context) {
         this.context = context;
@@ -49,9 +49,16 @@ public class ApiEventRetriever implements EventRetriever {
             try {
                 JSONArray jsonArray = response.getJSONArray("data");
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject person = jsonArray.getJSONObject(i);
-                    String name = person.getString("employee_name");
-                    Event ev = new Event("One", name, "Test", 2, "https://www.holland.com/upload_mm/9/c/1/65174_fullimage_joods-bruidje.jpg", 23.24535, 35.3422);
+                    JSONObject singleevent = jsonArray.getJSONObject(i);
+                    String id = singleevent.getString("eventId");
+                    String name = singleevent.getString("name");
+                    String desc = singleevent.getString("description");
+                    int date = singleevent.getInt("date");
+                    String imgurl = singleevent.getString("imageUrl");
+                    int longit = singleevent.getInt("date");
+                    int latit = singleevent.getInt("date");
+
+                    Event ev = new Event(id, name, desc, date, imgurl, longit, latit);
                     list.add(ev);
                 }
                 events.setValue(list);
