@@ -23,6 +23,7 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
     private static final String EVENT_IMAGE = "image_url";
     private static final String EVENT_LONG = "longitude";
     private static final String EVENT_LAT = "latitude";
+    private static final String EVENT_ID = "id";
 
     public LocalDatabaseHandler(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -42,6 +43,7 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
     public boolean insertEvent(Event event){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(EVENT_ID, event.getEventId());
         contentValues.put(EVENT_NAME, event.getEventName());
         contentValues.put(EVENT_DESC, event.getDescription());
         contentValues.put(EVENT_DATE, event.getDate());
