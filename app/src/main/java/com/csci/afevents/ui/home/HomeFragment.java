@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment {
 
         homeViewModel = new HomeViewModel(getContext());
         View view = inflater.inflate(R.layout.fragment_home,container ,false);
-        final ListAdapter listAdapter = new ListAdapter(getActivity());
+        final ListAdapter listAdapter = new ListAdapter();
 
         initViews(view, listAdapter);
 
