@@ -1,5 +1,7 @@
 package com.csci.afevents.entities;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 public class Event {
@@ -39,6 +41,15 @@ public class Event {
     public double getLongitude() { return longitude; }
     public double getLatitude() { return latitude; }
 
+    public String getMonth(){
+        return new SimpleDateFormat("MMM").format(new Date(this.date));
+    }
+    public String getDay(){
+        return new SimpleDateFormat("d").format(new Date(this.date));
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,4 +68,5 @@ public class Event {
     public int hashCode() {
         return Objects.hash(eventId, eventName, description, imageUrl, date, longitude, latitude);
     }
+
 }
