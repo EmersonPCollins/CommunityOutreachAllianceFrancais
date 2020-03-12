@@ -10,8 +10,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import static android.view.View.GONE;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -28,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        findViewById(R.id.loadingPanel).setVisibility(GONE);
+
     }
 
 }

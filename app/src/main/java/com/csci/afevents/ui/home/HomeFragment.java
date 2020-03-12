@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,7 +18,7 @@ import com.csci.afevents.entities.Event;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
-
+    private ProgressBar spinner;
     private RecyclerView recyclerView;
     private HomeViewModel homeViewModel;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -27,12 +28,17 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home,container ,false);
         final ListAdapter listAdapter = new ListAdapter();
         initViews(view, listAdapter);
+        spinner=view.findViewById(R.id.progressBar);
 
         homeViewModel.getEvents().observe(getViewLifecycleOwner(), new Observer<List<Event>>() {
             @Override
             public void onChanged(List<Event> events) {
                 listAdapter.data = events;
                 listAdapter.notifyDataSetChanged();
+                spinner.setVisibility(View.GONE);
+                if (listAdapter.data == null){
+                    spinner.setVisibility(View.VISIBLE);
+                }
             }
         });
         return view;
