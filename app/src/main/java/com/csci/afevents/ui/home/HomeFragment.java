@@ -25,12 +25,9 @@ public class HomeFragment extends Fragment {
 
         homeViewModel = new HomeViewModel(getContext());
         View view = inflater.inflate(R.layout.fragment_home,container ,false);
-        recyclerView = view.findViewById(R.id.my_recycler_view);
-
         final ListAdapter listAdapter = new ListAdapter();
-        recyclerView.setAdapter(listAdapter);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
+
+        initViews(view, listAdapter);
 
         homeViewModel.getEvents().observe(getViewLifecycleOwner(), new Observer<List<Event>>() {
             @Override
@@ -39,7 +36,13 @@ public class HomeFragment extends Fragment {
                 listAdapter.notifyDataSetChanged();
             }
         });
-
         return view;
+    }
+
+    private void initViews(View view, ListAdapter listAdapter) {
+        recyclerView = view.findViewById(R.id.my_recycler_view);
+        recyclerView.setAdapter(listAdapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
     }
 }

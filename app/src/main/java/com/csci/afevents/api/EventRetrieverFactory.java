@@ -9,7 +9,10 @@ import com.csci.afevents.impl.DummyEventRetriever;
 public class EventRetrieverFactory {
 
     public static EventRetriever getInstance(Context context) {
-        return new ApiEventRetriever(context);
+        if (isConnected(context)) {
+            return new ApiEventRetriever(context);
+        }
+        return new DummyEventRetriever();
     }
 
     private static boolean isConnected(Context context) {
