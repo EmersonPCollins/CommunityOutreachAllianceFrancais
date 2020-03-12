@@ -1,6 +1,6 @@
 package com.csci.afevents.ui.home;
 
-import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.csci.afevents.R;
-import com.csci.afevents.api.EventRetrieverFactory;
 import com.csci.afevents.entities.Event;
 import com.squareup.picasso.Picasso;
 
@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * @author Adama Camara
- *
+ * <p>
  * Recycler View adapter for displaying events in a list layout
  */
 
@@ -50,7 +50,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         return data.size();
     }
 
-    public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ListViewHolder extends RecyclerView.ViewHolder {
         private TextView eventNameView, eventDateView;
         private ImageView eventImageView;
 
@@ -59,7 +59,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             eventDateView = itemView.findViewById(R.id.event_date);
             eventNameView = itemView.findViewById(R.id.event_name);
             eventImageView = itemView.findViewById(R.id.event_image);
-            itemView.setOnClickListener(this);
         }
 
         private void bindView(int position) {
@@ -67,10 +66,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             eventNameView.setText(event.getEventName());
             eventDateView.setText(String.valueOf(event.getDate()));
             Picasso.get().load(event.getImageUrl()).fit().centerCrop().into(eventImageView);
-        }
-
-        public void onClick(View view){
-            //TODO: Open the EventDetailFragment when implemented
+            final Bundle bundle = new Bundle();
+            bundle.putSerializable("event", event);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(itemView)
+                            .navigate(R.id.action_navigation_home_to_event_detail_fragment, bundle);
+                }
+            });
         }
     }
 }
