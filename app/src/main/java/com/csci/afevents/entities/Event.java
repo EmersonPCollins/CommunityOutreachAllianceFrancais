@@ -40,13 +40,8 @@ public class Event {
     }
     public double getLongitude() { return longitude; }
     public double getLatitude() { return latitude; }
-
-    public String getMonth(){
-        return new SimpleDateFormat("MMM").format(new Date(this.date));
-    }
-    public String getDay(){
-        return new SimpleDateFormat("d").format(new Date(this.date));
-    }
+    public String getMonth(){ return new SimpleDateFormat("MMM").format(new Date(this.date)); }
+    public String getDay(){ return new SimpleDateFormat("d").format(new Date(this.date)); }
 
 
 
