@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
@@ -51,54 +52,56 @@ public class MapFragment extends Fragment {
         /**
          * Default point set to AFH  coordinates
          */
-        GeoPoint center = new GeoPoint(44.648766,-63.575237);
-        addMarker(center,"AFH","Alliance Francais Halifax");
+        GeoPoint center = new GeoPoint(44.648766, -63.575237);
+        addMarker(center, "AFH", "Alliance Francais Halifax");
         setFocus(center);
 
         /**
          * Setting markers for every events in the map
          */
-        List<Event> list = events.getValue();
-
         events.observe(getViewLifecycleOwner(), new Observer<List<Event>>() {
             @Override
             public void onChanged(List<Event> events) {
-                for (int i=0; i<events.size(); i++) {
-                    GeoPoint point = new GeoPoint(events.get(i).getLatitude(),events.get(i).getLongitude());
-                    addMarker(point,events.get(i).getEventName(),events.get(i).getDescription());
+                for (int i = 0; i < events.size(); i++) {
+                    osm.getOverlays().clear();
+                    GeoPoint point = new GeoPoint(events.get(i).getLatitude(), events.get(i).getLongitude());
+                    addMarker(point, events.get(i).getEventName(), events.get(i).getDescription());
                 }
             }
         });
 
         return root;
     }
+
     public void onResume() {
         super.onResume();
         osm.onResume();
     }
-    public void onPause(){
+
+    public void onPause() {
         super.onPause();
         osm.onPause();
     }
 
     /**
      * Method to set the focus on a selected point
+     *
      * @param point
      */
-    public void setFocus(GeoPoint point){
+    public void setFocus(GeoPoint point) {
         mc.setCenter(point);
         mc.setZoom(17);
     }
 
     /**
      * Method to add new point to the map
+     *
      * @param point
      */
-    public void addMarker(GeoPoint point, String location_title, String location_desc){
+    public void addMarker(GeoPoint point, String location_title, String location_desc) {
         Marker dot = new Marker(osm);
         dot.setPosition(point);
         dot.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        osm.getOverlays().clear();
         osm.getOverlays().add(dot);
     }
 }
