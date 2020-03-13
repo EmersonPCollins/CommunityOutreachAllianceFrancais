@@ -1,10 +1,11 @@
 package com.csci.afevents.entities;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-public class Event {
+public class Event implements Serializable {
     private String eventId;
     private String eventName;
     private String description;
@@ -23,23 +24,34 @@ public class Event {
         this.longitude = longitude;
         this.latitude = latitude;
     }
-    public String getEventId(){
+
+    public String getEventId() {
         return eventId;
     }
-    public String getEventName(){
+
+    public String getEventName() {
         return eventName;
     }
-    public String getDescription(){
+
+    public String getDescription() {
         return description;
     }
-    public int getDate(){
+
+    public int getDate() {
         return date;
     }
+
     public String getImageUrl() {
         return imageUrl;
     }
-    public double getLongitude() { return longitude; }
-    public double getLatitude() { return latitude; }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
 
     public String getMonth(){
         return new SimpleDateFormat("MMM").format(new Date(this.date));

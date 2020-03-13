@@ -9,12 +9,28 @@
         android:id="@+id/navigation_home"
         android:name="com.csci.afevents.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_event_detail_fragment"
+            app:destination="@id/event_detail_fragment"
+            app:popUpTo="@+id/navigation_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.csci.afevents.ui.dashboard.MapFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_event_detail_fragment"
+            app:destination="@id/event_detail_fragment"
+            app:popUpTo="@+id/navigation_dashboard" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/event_detail_fragment"
+        android:name="com.csci.afevents.ui.detail.EventDetailFragment"
+        android:label="@string/title_event_details"
+        tools:layout="@layout/fragment_event_detail" />
 
 </navigation>

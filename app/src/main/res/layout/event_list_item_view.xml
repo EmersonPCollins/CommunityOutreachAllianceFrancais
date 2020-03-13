@@ -39,6 +39,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@color/design_default_color_on_primary" />
 
+
     <TextView
         android:id="@+id/event_name"
         android:layout_width="152dp"
