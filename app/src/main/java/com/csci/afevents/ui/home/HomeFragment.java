@@ -18,18 +18,18 @@ import com.csci.afevents.entities.Event;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
+
     private ProgressBar spinner;
     private RecyclerView recyclerView;
     private HomeViewModel homeViewModel;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState){
+                             ViewGroup container, Bundle savedInstanceState) {
 
         homeViewModel = new HomeViewModel(getContext());
-        View view = inflater.inflate(R.layout.fragment_home,container ,false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         final ListAdapter listAdapter = new ListAdapter();
-
         initViews(view, listAdapter);
-        spinner=view.findViewById(R.id.progressBar);
 
         homeViewModel.getEvents().observe(getViewLifecycleOwner(), new Observer<List<Event>>() {
             @Override
@@ -37,15 +37,13 @@ public class HomeFragment extends Fragment {
                 listAdapter.data = events;
                 listAdapter.notifyDataSetChanged();
                 spinner.setVisibility(View.GONE);
-                if (listAdapter.data == null){
-                    spinner.setVisibility(View.VISIBLE);
-                }
             }
         });
         return view;
     }
 
     private void initViews(View view, ListAdapter listAdapter) {
+        spinner = view.findViewById(R.id.progressBar);
         recyclerView = view.findViewById(R.id.my_recycler_view);
         recyclerView.setAdapter(listAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
