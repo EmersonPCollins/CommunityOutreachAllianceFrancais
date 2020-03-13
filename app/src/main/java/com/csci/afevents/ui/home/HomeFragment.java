@@ -24,9 +24,8 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState){
 
         homeViewModel = new HomeViewModel(getContext());
-        View view = inflater.inflate(R.layout.fragment_home,container ,false);
+        final View view = inflater.inflate(R.layout.fragment_home,container ,false);
         final ListAdapter listAdapter = new ListAdapter();
-
         initViews(view, listAdapter);
 
         homeViewModel.getEvents().observe(getViewLifecycleOwner(), new Observer<List<Event>>() {

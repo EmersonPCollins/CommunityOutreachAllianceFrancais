@@ -73,4 +73,13 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
         cursor.close();
         return events;
     }
+
+    public void dropAndSetEvents(List<Event> events) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
+        for (Event event : events) {
+            insertEvent(event);
+        }
+    }
 }

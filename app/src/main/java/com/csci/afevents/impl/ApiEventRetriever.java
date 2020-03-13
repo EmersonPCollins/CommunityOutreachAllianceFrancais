@@ -8,6 +8,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.csci.afevents.api.EventRetriever;
+import com.csci.afevents.db.LocalDatabaseHandler;
 import com.csci.afevents.entities.Event;
 
 import org.json.JSONArray;
@@ -25,10 +26,12 @@ public class ApiEventRetriever implements EventRetriever {
     private Context context;
     private MutableLiveData<List<Event>> events;
     private final String EVENT_ENDPOINT = "https://afhalifax.ca/EVLOFFICE/a.php";
+    private LocalDatabaseHandler db;
 
     public ApiEventRetriever(Context context) {
         this.context = context;
         events = new MutableLiveData<>();
+        db = new LocalDatabaseHandler(context);
     }
 
     @Override
@@ -64,6 +67,9 @@ public class ApiEventRetriever implements EventRetriever {
                             lon
                     );
                     list.add(event);
+                }
+                if (!list.isEmpty()) {
+                    db.dropAndSetEvents(list);
                 }
                 events.setValue(list);
             } catch (JSONException e) {
