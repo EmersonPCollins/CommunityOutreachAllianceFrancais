@@ -61,7 +61,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             eventDateDay = itemView.findViewById(R.id.event_date_day);
             eventDateMonth = itemView.findViewById(R.id.event_date_month);
             eventDescription = itemView.findViewById(R.id.description);
-            itemView.setOnClickListener(this);
         }
 
         private void bindView(int position) {
