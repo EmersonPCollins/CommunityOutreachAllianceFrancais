@@ -24,7 +24,7 @@ public class ApiEventRetriever implements EventRetriever {
 
     private Context context;
     private MutableLiveData<List<Event>> events;
-    private final String EVENT_ENDPOINT = "http://dummy.restapiexample.com/api/v1/employees";
+    private final String EVENT_ENDPOINT = "https://dummy.restapiexample.com/api/v1/employees";
 
     public ApiEventRetriever(Context context) {
         this.context = context;

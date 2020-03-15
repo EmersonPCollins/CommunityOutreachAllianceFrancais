@@ -1,6 +1,8 @@
 package com.csci.afevents.entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 public class Event implements Serializable {
@@ -51,6 +53,11 @@ public class Event implements Serializable {
         return latitude;
     }
 
+    public String getMonth(){ return new SimpleDateFormat("MMM").format(new Date(this.date)); }
+    public String getDay(){ return new SimpleDateFormat("d").format(new Date(this.date)); }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,4 +76,5 @@ public class Event implements Serializable {
     public int hashCode() {
         return Objects.hash(eventId, eventName, description, imageUrl, date, longitude, latitude);
     }
+
 }

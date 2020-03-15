@@ -51,28 +51,38 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     }
 
     public class ListViewHolder extends RecyclerView.ViewHolder {
-        private TextView eventNameView, eventDateView;
+        private TextView eventNameView, eventDateDay, eventDateMonth, eventDescription;
         private ImageView eventImageView;
 
         private ListViewHolder(View itemView) {
             super(itemView);
-            eventDateView = itemView.findViewById(R.id.event_date);
             eventNameView = itemView.findViewById(R.id.event_name);
             eventImageView = itemView.findViewById(R.id.event_image);
+            eventDateDay = itemView.findViewById(R.id.event_date_day);
+            eventDateMonth = itemView.findViewById(R.id.event_date_month);
+            eventDescription = itemView.findViewById(R.id.description);
         }
 
         private void bindView(int position) {
-            Event event = data.get(position);
+            final Event event = data.get(position);
             eventNameView.setText(event.getEventName());
-            eventDateView.setText(String.valueOf(event.getDate()));
             Picasso.get().load(event.getImageUrl()).fit().centerCrop().into(eventImageView);
-            final Bundle bundle = new Bundle();
-            bundle.putSerializable("event", event);
+            eventDateMonth.setText(event.getMonth());
+            eventDateDay.setText(event.getDay());
+            eventDescription.setText(event.getDescription());
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Navigation.findNavController(itemView)
-                            .navigate(R.id.action_navigation_home_to_event_detail_fragment, bundle);
+                    final Bundle bundle = new Bundle();
+                    bundle.putSerializable("event", event);
+                    itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Navigation.findNavController(itemView)
+                                    .navigate(R.id.action_navigation_home_to_event_detail_fragment, bundle);
+                        }
+                    });
                 }
             });
         }
