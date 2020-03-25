@@ -25,7 +25,6 @@ import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -65,7 +64,7 @@ public class MapFragment extends Fragment {
                 for (int i = 0; i < events.size(); i++) {
                     osm.getOverlays().clear();
                     GeoPoint point = new GeoPoint(events.get(i).getLatitude(), events.get(i).getLongitude());
-                    addMarker(point, events.get(i).getEventName(), events.get(i).getDescription());
+                    addMarker(point, events.get(i).getEventName(), events.get(i).getFrenchDescription());
                 }
             }
         });

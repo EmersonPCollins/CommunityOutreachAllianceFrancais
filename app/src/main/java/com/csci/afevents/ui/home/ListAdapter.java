@@ -60,7 +60,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             eventImageView = itemView.findViewById(R.id.event_image);
             eventDateDay = itemView.findViewById(R.id.event_date_day);
             eventDateMonth = itemView.findViewById(R.id.event_date_month);
-            eventDescription = itemView.findViewById(R.id.description);
+            eventDescription = itemView.findViewById(R.id.french_description);
         }
 
         private void bindView(int position) {
@@ -69,7 +69,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             Picasso.get().load(event.getImageUrl()).fit().centerCrop().into(eventImageView);
             eventDateMonth.setText(event.getMonth());
             eventDateDay.setText(event.getDay());
-            eventDescription.setText(event.getDescription());
+            eventDescription.setText(event.getFrenchDescription());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
