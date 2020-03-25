@@ -4,7 +4,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.csci.afevents.impl.ApiEventRetriever;
-import com.csci.afevents.impl.DummyEventRetriever;
+import com.csci.afevents.impl.DatabaseEventRetirever;
 
 public class EventRetrieverFactory {
 
@@ -12,7 +12,7 @@ public class EventRetrieverFactory {
         if (isConnected(context)) {
             return new ApiEventRetriever(context);
         }
-        return new DummyEventRetriever();
+        return new DatabaseEventRetirever(context);
     }
 
     private static boolean isConnected(Context context) {

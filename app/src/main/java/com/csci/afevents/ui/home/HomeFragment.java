@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.csci.afevents.R;
 import com.csci.afevents.entities.Event;
-import com.csci.afevents.impl.DummyEventRetriever;
 
 import java.util.List;
 
