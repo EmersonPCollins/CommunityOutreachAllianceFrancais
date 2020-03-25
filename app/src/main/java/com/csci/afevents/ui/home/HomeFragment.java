@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.csci.afevents.R;
 import com.csci.afevents.entities.Event;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 import java.util.List;
 
@@ -25,6 +28,7 @@ public class HomeFragment extends Fragment implements DatePickerDialog.OnDateSet
     private ProgressBar spinner;
     private RecyclerView recyclerView;
     private HomeViewModel homeViewModel;
+    private TextView selectedDate;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,7 +45,8 @@ public class HomeFragment extends Fragment implements DatePickerDialog.OnDateSet
                 spinner.setVisibility(View.GONE);
             }
         });
-        view.findViewById(R.id.date_filter_view).setOnClickListener(new View.OnClickListener(){
+        selectedDate = view.findViewById(R.id.date_filter_view);
+        selectedDate.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
@@ -68,6 +73,6 @@ public class HomeFragment extends Fragment implements DatePickerDialog.OnDateSet
     }
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-
+        selectedDate.setText(year+"/"+month+"/"+dayOfMonth);
     }
 }
