@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ProgressBar;
 
@@ -17,12 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.csci.afevents.R;
 import com.csci.afevents.entities.Event;
-import com.csci.afevents.impl.DummyEventRetriever;
 
 import java.util.Calendar;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements DatePickerDialog.OnDateSetListener{
 
     private ProgressBar spinner;
     private RecyclerView recyclerView;
@@ -35,7 +33,6 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         final ListAdapter listAdapter = new ListAdapter();
         initViews(view, listAdapter);
-
         homeViewModel.getEvents().observe(getViewLifecycleOwner(), new Observer<List<Event>>() {
             @Override
             public void onChanged(List<Event> events) {
@@ -44,14 +41,33 @@ public class HomeFragment extends Fragment {
                 spinner.setVisibility(View.GONE);
             }
         });
+        view.findViewById(R.id.date_filter_view).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
         return view;
     }
-
+    private void showDatePickerDialog(){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getContext(),
+                HomeFragment.this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
     private void initViews(View view, ListAdapter listAdapter) {
         spinner = view.findViewById(R.id.progressBar);
         recyclerView = view.findViewById(R.id.my_recycler_view);
         recyclerView.setAdapter(listAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+    }
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+
     }
 }
