@@ -1,28 +1,39 @@
 package com.csci.afevents.entities;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Event implements Serializable {
     private String eventId;
     private String eventName;
-    private String description;
+    private String frenchDescription;
+    private String englishDescription;
     private String imageUrl;
-    private int date;
+    private String date;
+    private String address;
     private double latitude;
     private double longitude;
 
-    public Event(String eventId, String eventName, String description, int date, String imageUrl,
-                 double longitude, double latitude) {
+    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+    private static DateFormat monthFormat = new SimpleDateFormat("MMM", Locale.US);
+    private static DateFormat dayFormat = new SimpleDateFormat("dd", Locale.US);
+
+    public Event(String eventId, String eventName, String frenchDescription, String date, String imageUrl,
+                 double longitude, double latitude, String address, String englishDescription) {
         this.eventId = eventId;
         this.eventName = eventName;
-        this.description = description;
+        this.frenchDescription = frenchDescription;
+        this.englishDescription = englishDescription;
         this.date = date;
         this.imageUrl = imageUrl;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.address = address;
     }
 
     public String getEventId() {
@@ -33,16 +44,44 @@ public class Event implements Serializable {
         return eventName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getFrenchDescription() {
+        return frenchDescription;
     }
 
-    public int getDate() {
+    public String getEnglishDescription() {
+        return englishDescription;
+    }
+
+    public String getDate() {
         return date;
     }
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getMonth() {
+        try {
+            Date parsed = format.parse(date);
+            return monthFormat.format(parsed);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
+    public String getDay() {
+        try {
+            Date parsed = format.parse(date);
+            return dayFormat.format(parsed);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 
     public double getLongitude() {
@@ -53,28 +92,17 @@ public class Event implements Serializable {
         return latitude;
     }
 
-    public String getMonth(){ return new SimpleDateFormat("MMM").format(new Date(this.date)); }
-    public String getDay(){ return new SimpleDateFormat("d").format(new Date(this.date)); }
-
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
-        return date == event.date &&
-                Objects.equals(eventId, event.eventId) &&
-                Objects.equals(eventName, event.eventName) &&
-                Objects.equals(description, event.description) &&
-                Objects.equals(imageUrl, event.imageUrl) &&
-                Objects.equals(longitude, event.longitude) &&
-                Objects.equals(latitude, event.latitude);
+        return getEventId().equals(event.getEventId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(eventId, eventName, description, imageUrl, date, longitude, latitude);
+        return Objects.hash(eventId, eventName, frenchDescription, imageUrl, date, longitude, latitude);
     }
 
 }

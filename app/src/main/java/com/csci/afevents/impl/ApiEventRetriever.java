@@ -52,26 +52,28 @@ public class ApiEventRetriever implements EventRetriever {
                 for (int i = 0; i < response.length(); i++) {
                     JSONObject jsonEvent = response.getJSONObject(i);
                     double lat = 0.0, lon = 0.0;
-                    if (!jsonEvent.getString("lats").isEmpty() &&
-                            !jsonEvent.getString("lonts").isEmpty()) {
-                        lat = Double.valueOf(jsonEvent.getString("lats"));
-                        lon = Double.valueOf(jsonEvent.getString("lonts"));
+                    if (!jsonEvent.getString("loc_Lat").isEmpty() &&
+                            !jsonEvent.getString("loc_Long").isEmpty()) {
+                        lat = Double.valueOf(jsonEvent.getString("loc_Lat"));
+                        lon = Double.valueOf(jsonEvent.getString("loc_Long"));
                     }
                     Event event = new Event(
                             jsonEvent.getString("id"),
                             jsonEvent.getString("name"),
                             jsonEvent.getString("descriptionfr"),
-                            1583477633,
+                            jsonEvent.getString("date"),
                             jsonEvent.getString("image"),
                             lat,
-                            lon
+                            lon,
+                            jsonEvent.getString("loc_Address"),
+                            jsonEvent.getString("descriptionen")
                     );
                     list.add(event);
                 }
+                events.setValue(list);
                 if (!list.isEmpty()) {
                     db.dropAndSetEvents(list);
                 }
-                events.setValue(list);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
