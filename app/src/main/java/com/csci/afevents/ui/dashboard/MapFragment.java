@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.Navigation;
 
 import com.csci.afevents.R;
 import com.csci.afevents.api.EventRetriever;
@@ -24,6 +25,7 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
 import java.util.List;
 
@@ -52,7 +54,6 @@ public class MapFragment extends Fragment {
          * Default point set to AFH  coordinates
          */
         GeoPoint center = new GeoPoint(44.648766, -63.575237);
-        addMarker(center, "AFH", "Alliance Francais Halifax");
         setFocus(center);
 
         /**
@@ -64,7 +65,7 @@ public class MapFragment extends Fragment {
                 for (int i = 0; i < events.size(); i++) {
                     osm.getOverlays().clear();
                     GeoPoint point = new GeoPoint(events.get(i).getLatitude(), events.get(i).getLongitude());
-                    addMarker(point, events.get(i).getEventName(), events.get(i).getFrenchDescription());
+                    addMarker(point, events.get(i));
                 }
             }
         });
@@ -97,10 +98,22 @@ public class MapFragment extends Fragment {
      *
      * @param point
      */
-    public void addMarker(GeoPoint point, String location_title, String location_desc) {
+    public void addMarker(GeoPoint point, final Event event) {
         Marker dot = new Marker(osm);
         dot.setPosition(point);
         dot.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        dot.setTitle(event.getEventName());
+        dot.showInfoWindow();
+        dot.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker, MapView mapView) {
+                final Bundle bundle = new Bundle();
+                bundle.putSerializable("event", event);
+                Navigation.findNavController(mapView)
+                        .navigate(R.id.action_navigation_dashboard_to_event_detail_fragment, bundle);
+                return true;
+            }
+        });
         osm.getOverlays().add(dot);
     }
 }
