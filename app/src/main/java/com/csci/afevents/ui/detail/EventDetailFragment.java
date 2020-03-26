@@ -23,7 +23,6 @@ public class EventDetailFragment extends Fragment {
     private TextView eventDescriptionFr;
     private TextView eventDescriptionEn;
 
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_event_detail, container, false);
