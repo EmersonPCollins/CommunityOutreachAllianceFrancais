@@ -48,8 +48,16 @@ public class Event implements Serializable {
         return frenchDescription;
     }
 
+    public String getFrenchDescriptionFormatted() {
+        return frenchDescription.replaceAll("\\\\r\\\\n", "\n\n");
+    }
+
     public String getEnglishDescription() {
         return englishDescription;
+    }
+
+    public String getEnglishDescriptionFormatted() {
+        return englishDescription.replaceAll("\\\\r\\\\n", "\n\n");
     }
 
     public String getDate() {
