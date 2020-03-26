@@ -4,4 +4,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_event_details">Event Details</string>
+    <string name="french_description_sample">"é à è ç Au cours du premier semestre, le Rijksmuseum propose l\\'exposition « Alle Rembrandts». Pour la première fois, le musée expose simultanÃ©ment toutes les oeuvres de Rembrandt en une seule exposition. Non moins de 22 peintures, 60 dessins et 300 gravures y seront présentées.\\r\\n\\r\\nLe Rijksmuseum possède la plus grande et la plus importante collection de Rembrandt au monde. \\r\\nAlle Rembrandts\\r\\n est donc une occasion unique de voir à  la fois ses autoportraits intimes, ses grandes scènes et ses croquis particuliers, et de découvrir pourquoi il fait toujours partie des meilleurs artistes du monde actuel.",
+        "descriptionen": "The Rijksmuseum has the largest and most important collection of Rembrandts in the world.\r\nAlle Rembrandts\r\n is therefore a unique opportunity to see both his intimate self-portraits, his great scenes and his specific sketches, and to discover why he is still one of the best artists in the world today."</string>
 </resources>

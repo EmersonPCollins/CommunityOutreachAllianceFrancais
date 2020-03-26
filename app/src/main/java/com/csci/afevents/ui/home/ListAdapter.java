@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,14 +54,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     public class ListViewHolder extends RecyclerView.ViewHolder {
         private TextView eventNameView, eventDateDay, eventDateMonth, eventDescription;
         private ImageView eventImageView;
+        private Button detailButton;
 
         private ListViewHolder(View itemView) {
             super(itemView);
-            eventNameView = itemView.findViewById(R.id.event_name);
-            eventImageView = itemView.findViewById(R.id.event_image);
-            eventDateDay = itemView.findViewById(R.id.event_date_day);
-            eventDateMonth = itemView.findViewById(R.id.event_date_month);
-            eventDescription = itemView.findViewById(R.id.french_description);
+            eventNameView = itemView.findViewById(R.id.event_name_view);
+            eventImageView = itemView.findViewById(R.id.event_image_view);
+            eventDateDay = itemView.findViewById(R.id.date_day_view);
+            eventDateMonth = itemView.findViewById(R.id.date_month_view);
+            eventDescription = itemView.findViewById(R.id.event_description_view);
+            detailButton = itemView.findViewById(R.id.more_details_button);
         }
 
         private void bindView(int position) {
@@ -70,21 +73,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             eventDateMonth.setText(event.getMonth());
             eventDateDay.setText(event.getDay());
             eventDescription.setText(event.getFrenchDescription());
-
-            itemView.setOnClickListener(new View.OnClickListener() {
+            View.OnClickListener listener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     final Bundle bundle = new Bundle();
                     bundle.putSerializable("event", event);
-                    itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Navigation.findNavController(itemView)
-                                    .navigate(R.id.action_navigation_home_to_event_detail_fragment, bundle);
-                        }
-                    });
+                    Navigation.findNavController(itemView)
+                            .navigate(R.id.action_navigation_home_to_event_detail_fragment, bundle);
                 }
-            });
+            };
+            itemView.setOnClickListener(listener);
+            detailButton.setOnClickListener(listener);
         }
     }
 }
