@@ -16,6 +16,8 @@ public class Event implements Serializable {
     private String imageUrl;
     private String date;
     private String address;
+    private String costFr;
+    private String costEn;
     private double latitude;
     private double longitude;
 
@@ -24,7 +26,8 @@ public class Event implements Serializable {
     private static DateFormat dayFormat = new SimpleDateFormat("dd", Locale.US);
 
     public Event(String eventId, String eventName, String frenchDescription, String date, String imageUrl,
-                 double longitude, double latitude, String address, String englishDescription) {
+                 double longitude, double latitude, String address, String englishDescription,
+                 String costFr, String costEn) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.frenchDescription = frenchDescription;
@@ -34,6 +37,8 @@ public class Event implements Serializable {
         this.longitude = longitude;
         this.latitude = latitude;
         this.address = address;
+        this.costEn = costEn;
+        this.costFr = costFr;
     }
 
     public String getEventId() {
@@ -98,6 +103,14 @@ public class Event implements Serializable {
 
     public double getLatitude() {
         return latitude;
+    }
+
+    public String getCostFr() {
+        return costFr;
+    }
+
+    public String getCostEn() {
+        return costEn;
     }
 
     @Override

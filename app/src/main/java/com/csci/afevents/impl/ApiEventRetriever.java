@@ -1,6 +1,7 @@
 package com.csci.afevents.impl;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,6 +27,7 @@ public class ApiEventRetriever implements EventRetriever {
     private Context context;
     private MutableLiveData<List<Event>> events;
     private final String EVENT_ENDPOINT = "https://afhalifax.ca/EVLOFFICE/a.php";
+    public final static String LAST_DATA_RETRIEVAL_TIME = "last_data_retrieval_time";
     private LocalDatabaseHandler db;
 
     public ApiEventRetriever(Context context) {
@@ -66,13 +68,18 @@ public class ApiEventRetriever implements EventRetriever {
                             lat,
                             lon,
                             jsonEvent.getString("loc_Address"),
-                            jsonEvent.getString("descriptionen")
+                            jsonEvent.getString("descriptionen"),
+                            jsonEvent.getString("costfr"),
+                            jsonEvent.getString("costen")
                     );
                     list.add(event);
                 }
                 events.setValue(list);
                 if (!list.isEmpty()) {
                     db.dropAndSetEvents(list);
+                    SharedPreferences pref = context
+                            .getSharedPreferences("afsettings", Context.MODE_PRIVATE);
+                    pref.edit().putLong(LAST_DATA_RETRIEVAL_TIME, System.currentTimeMillis()).apply();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

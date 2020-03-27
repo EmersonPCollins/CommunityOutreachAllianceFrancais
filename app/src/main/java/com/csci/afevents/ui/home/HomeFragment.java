@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
 
     private void initViews(View view, ListAdapter listAdapter) {
         spinner = view.findViewById(R.id.progressBar);
+        spinner.setVisibility(View.VISIBLE);
         recyclerView = view.findViewById(R.id.my_recycler_view);
         recyclerView.setAdapter(listAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());

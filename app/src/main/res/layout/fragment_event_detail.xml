@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,7 +27,8 @@
             android:layout_marginTop="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/event_detail_image" />
+            app:layout_constraintTop_toBottomOf="@id/event_detail_image"
+            tools:text="Event title"/>
 
         <TextView
             android:id="@+id/event_description_fr"
@@ -35,6 +37,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
+            tools:text="Event description en Francaise"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/event_address_view"
             app:layout_constraintTop_toBottomOf="@+id/event_address_view" />
@@ -46,6 +49,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
+            tools:text="Event description in English"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/event_description_fr"
             app:layout_constraintTop_toBottomOf="@+id/event_description_fr" />
@@ -55,6 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            tools:text="2020-05-23"
             app:layout_constraintStart_toStartOf="@+id/event_title"
             app:layout_constraintTop_toBottomOf="@+id/event_title" />
 
@@ -63,7 +68,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            tools:text="1600 University Ave"
             app:layout_constraintStart_toStartOf="@id/date_view"
             app:layout_constraintTop_toBottomOf="@+id/date_view" />
+
+        <TextView
+            android:id="@+id/cost_fr_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Cost French"
+            app:layout_constraintStart_toStartOf="@+id/event_description_en"
+            app:layout_constraintTop_toBottomOf="@+id/event_description_en" />
+
+        <TextView
+            android:id="@+id/cost_en_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="English Cost"
+            app:layout_constraintStart_toStartOf="@+id/cost_fr_view"
+            app:layout_constraintTop_toBottomOf="@+id/cost_fr_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
