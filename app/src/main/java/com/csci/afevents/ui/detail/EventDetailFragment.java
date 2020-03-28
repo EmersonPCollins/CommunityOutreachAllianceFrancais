@@ -22,6 +22,8 @@ public class EventDetailFragment extends Fragment {
     private TextView eventAddressView;
     private TextView eventDescriptionFr;
     private TextView eventDescriptionEn;
+    private TextView frenchCostView;
+    private TextView englishCostView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -33,9 +35,10 @@ public class EventDetailFragment extends Fragment {
         eventTitleView.setText(event.getEventName());
         eventDateView.setText(event.getDate());
         eventAddressView.setText(event.getAddress());
-
         eventDescriptionFr.setText(event.getFrenchDescriptionFormatted());
         eventDescriptionEn.setText(event.getEnglishDescriptionFormatted());
+        frenchCostView.setText(event.getCostFr());
+        englishCostView.setText(event.getCostEn());
         return view;
     }
 
@@ -46,6 +49,8 @@ public class EventDetailFragment extends Fragment {
         eventAddressView = view.findViewById(R.id.event_address_view);
         eventDescriptionFr = view.findViewById(R.id.event_description_fr);
         eventDescriptionEn = view.findViewById(R.id.event_description_en);
+        frenchCostView = view.findViewById(R.id.cost_fr_view);
+        englishCostView = view.findViewById(R.id.cost_en_view);
     }
 
 }

@@ -25,6 +25,8 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
     private static final String EVENT_IMAGE = "image_url";
     private static final String EVENT_LONG = "longitude";
     private static final String EVENT_LAT = "latitude";
+    private static final String EVENT_COST_FR = "cost_fr";
+    private static final String EVENT_COST_EN = "cost_en";
 
     public LocalDatabaseHandler(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -40,7 +42,9 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
                 "date TEXT, " +
                 "image_url TEXT, " +
                 "longitude REAL, " +
-                "latitude REAL)");
+                "latitude REAL, " +
+                "cost_fr TEXT," +
+                "cost_en TEXT)");
     }
 
     @Override
@@ -60,6 +64,8 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(EVENT_IMAGE, event.getImageUrl());
         contentValues.put(EVENT_LONG, event.getLongitude());
         contentValues.put(EVENT_LAT, event.getLatitude());
+        contentValues.put(EVENT_COST_FR, event.getCostFr());
+        contentValues.put(EVENT_COST_EN, event.getCostEn());
         long result = db.insert(TABLE_NAME, null, contentValues);
         return result != -1;
     }
@@ -78,7 +84,9 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
                         cursor.getDouble(7),
                         cursor.getDouble(8),
                         cursor.getString(4),
-                        cursor.getString(3));
+                        cursor.getString(3),
+                        cursor.getString(9),
+                        cursor.getString(10));
                 events.add(event);
             } while (cursor.moveToNext());
         }
