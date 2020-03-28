@@ -63,8 +63,8 @@ public class ApiEventRetriever implements EventRetriever {
                             jsonEvent.getString("descriptionfr"),
                             jsonEvent.getString("date"),
                             jsonEvent.getString("image"),
-                            lat,
                             lon,
+                            lat,
                             jsonEvent.getString("loc_Address"),
                             jsonEvent.getString("descriptionen")
                     );

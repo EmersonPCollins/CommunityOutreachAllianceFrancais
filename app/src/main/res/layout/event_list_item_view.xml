@@ -72,6 +72,8 @@
         android:gravity="center_horizontal|top"
         android:paddingBottom="2dp"
         android:paddingEnd="15dp"
+        android:singleLine="true"
+        android:ellipsize="none"
         android:paddingStart="15dp"
         android:textColor="@color/white"
         android:textSize="20sp"
