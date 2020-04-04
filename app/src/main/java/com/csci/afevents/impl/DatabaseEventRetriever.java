@@ -11,11 +11,11 @@ import com.csci.afevents.entities.Event;
 
 import java.util.List;
 
-public class DatabaseEventRetirever implements EventRetriever {
+public class DatabaseEventRetriever implements EventRetriever {
 
     private LocalDatabaseHandler db;
 
-    public DatabaseEventRetirever (Context context) {
+    public DatabaseEventRetriever(Context context) {
         db = new LocalDatabaseHandler(context);
     }
 

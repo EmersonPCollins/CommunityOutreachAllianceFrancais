@@ -6,7 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.csci.afevents.impl.ApiEventRetriever;
-import com.csci.afevents.impl.DatabaseEventRetirever;
+import com.csci.afevents.impl.DatabaseEventRetriever;
 
 public class EventRetrieverFactory {
 
@@ -16,7 +16,7 @@ public class EventRetrieverFactory {
         if (isConnected(context) && hasStaleData(context)) {
             return new ApiEventRetriever(context);
         }
-        return new DatabaseEventRetirever(context);
+        return new DatabaseEventRetriever(context);
     }
 
     private static boolean hasStaleData(Context context) {
